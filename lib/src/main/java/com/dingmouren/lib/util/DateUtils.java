@@ -18,6 +18,7 @@ import static com.dingmouren.lib.util.ConstantUtils.SEC;
 /**
  * Created by dingmouren on 2018/3/19.
  * emial: naildingmouren@gmail.com
+ *
  * 日期工具类
  *                          HH:mm    15:44
  *                         h:mm a    3:44 下午
