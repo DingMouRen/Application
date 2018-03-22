@@ -372,7 +372,4 @@ public class DateUtils {
         return cal.get(Calendar.WEEK_OF_MONTH);
     }
 
-
-
-
 }
