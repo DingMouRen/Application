@@ -13,7 +13,7 @@ public final class ShellUtils {
     private static final String LINE_SEP = System.getProperty("line.separator");
 
     private ShellUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
+        throw new UnsupportedOperationException("can't instantiate ShellUtils.");
     }
 
     /**

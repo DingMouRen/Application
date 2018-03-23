@@ -39,7 +39,7 @@ import static android.Manifest.permission.INTERNET;
 
 public class DeviceUtils {
     private DeviceUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
+        throw new UnsupportedOperationException("can't instantiate DeviceUtils");
     }
 
     /**

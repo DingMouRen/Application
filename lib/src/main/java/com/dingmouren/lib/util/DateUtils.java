@@ -57,7 +57,7 @@ public class DateUtils {
 
     /*私有构造函数*/
     private DateUtils(){
-        throw new UnsupportedOperationException("DateUtils不支持此操作");
+        throw new UnsupportedOperationException("can't instaniate DateUtils");
     }
 
     /**
