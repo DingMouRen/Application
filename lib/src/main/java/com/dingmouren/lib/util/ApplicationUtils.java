@@ -118,4 +118,8 @@ public class ApplicationUtils {
         }
     }
 
+    public static LinkedList<Activity> getActivityList() {
+        return sActivityList;
+    }
+
 }
