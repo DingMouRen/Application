@@ -57,7 +57,7 @@ import java.lang.ref.WeakReference;
 import static android.graphics.BlurMaskFilter.Blur;
 
 /**
- *字符串的样式工具类
+ * 文本排版工具类
  * setFlag           : 设置标识
  setForegroundColor: 设置前景色
  setBackgroundColor: 设置背景色
