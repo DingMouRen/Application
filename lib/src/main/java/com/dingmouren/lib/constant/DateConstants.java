@@ -6,14 +6,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2017/03/13
- *     desc  : The constants of time.
- * </pre>
+日期时间的字段
  */
-public final class TimeConstants {
+public final class DateConstants {
 
     public static final int MSEC = 1;
     public static final int SEC  = 1000;

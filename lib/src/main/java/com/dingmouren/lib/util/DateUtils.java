@@ -3,22 +3,14 @@ package com.dingmouren.lib.util;
 
 import android.annotation.SuppressLint;
 
-import com.dingmouren.lib.constant.TimeConstants;
+import com.dingmouren.lib.constant.DateConstants;
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
-import static com.dingmouren.lib.util.ConstantUtils.DAY;
-import static com.dingmouren.lib.util.ConstantUtils.HOUR;
-import static com.dingmouren.lib.util.ConstantUtils.MIN;
-import static com.dingmouren.lib.util.ConstantUtils.MSEC;
-import static com.dingmouren.lib.util.ConstantUtils.SEC;
 
 /**
  * Created by dingmouren on 2018/3/19.
@@ -214,17 +206,17 @@ public class DateUtils {
      * @param time2 The second formatted time string.
      * @param unit  The unit of time span.
      *              <ul>
-     *              <li>{@link TimeConstants#MSEC}</li>
-     *              <li>{@link TimeConstants#SEC }</li>
-     *              <li>{@link TimeConstants#MIN }</li>
-     *              <li>{@link TimeConstants#HOUR}</li>
-     *              <li>{@link TimeConstants#DAY }</li>
+     *              <li>{@link DateConstants#MSEC}</li>
+     *              <li>{@link DateConstants#SEC }</li>
+     *              <li>{@link DateConstants#MIN }</li>
+     *              <li>{@link DateConstants#HOUR}</li>
+     *              <li>{@link DateConstants#DAY }</li>
      *              </ul>
      * @return the time span, in unit
      */
     public static long getTimeSpan(final String time1,
                                    final String time2,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return getTimeSpan(time1, time2, DEFAULT_FORMAT, unit);
     }
 
@@ -236,18 +228,18 @@ public class DateUtils {
      * @param format The format.
      * @param unit   The unit of time span.
      *               <ul>
-     *               <li>{@link TimeConstants#MSEC}</li>
-     *               <li>{@link TimeConstants#SEC }</li>
-     *               <li>{@link TimeConstants#MIN }</li>
-     *               <li>{@link TimeConstants#HOUR}</li>
-     *               <li>{@link TimeConstants#DAY }</li>
+     *               <li>{@link DateConstants#MSEC}</li>
+     *               <li>{@link DateConstants#SEC }</li>
+     *               <li>{@link DateConstants#MIN }</li>
+     *               <li>{@link DateConstants#HOUR}</li>
+     *               <li>{@link DateConstants#DAY }</li>
      *               </ul>
      * @return the time span, in unit
      */
     public static long getTimeSpan(final String time1,
                                    final String time2,
                                    final DateFormat format,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return millis2TimeSpan(
                 Math.abs(string2Millis(time1, format) - string2Millis(time2, format)), unit
         );
@@ -260,17 +252,17 @@ public class DateUtils {
      * @param date2 The second date.
      * @param unit  The unit of time span.
      *              <ul>
-     *              <li>{@link TimeConstants#MSEC}</li>
-     *              <li>{@link TimeConstants#SEC }</li>
-     *              <li>{@link TimeConstants#MIN }</li>
-     *              <li>{@link TimeConstants#HOUR}</li>
-     *              <li>{@link TimeConstants#DAY }</li>
+     *              <li>{@link DateConstants#MSEC}</li>
+     *              <li>{@link DateConstants#SEC }</li>
+     *              <li>{@link DateConstants#MIN }</li>
+     *              <li>{@link DateConstants#HOUR}</li>
+     *              <li>{@link DateConstants#DAY }</li>
      *              </ul>
      * @return the time span, in unit
      */
     public static long getTimeSpan(final Date date1,
                                    final Date date2,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return millis2TimeSpan(Math.abs(date2Millis(date1) - date2Millis(date2)), unit);
     }
 
@@ -281,17 +273,17 @@ public class DateUtils {
      * @param millis2 The second milliseconds.
      * @param unit    The unit of time span.
      *                <ul>
-     *                <li>{@link TimeConstants#MSEC}</li>
-     *                <li>{@link TimeConstants#SEC }</li>
-     *                <li>{@link TimeConstants#MIN }</li>
-     *                <li>{@link TimeConstants#HOUR}</li>
-     *                <li>{@link TimeConstants#DAY }</li>
+     *                <li>{@link DateConstants#MSEC}</li>
+     *                <li>{@link DateConstants#SEC }</li>
+     *                <li>{@link DateConstants#MIN }</li>
+     *                <li>{@link DateConstants#HOUR}</li>
+     *                <li>{@link DateConstants#DAY }</li>
      *                </ul>
      * @return the time span, in unit
      */
     public static long getTimeSpan(final long millis1,
                                    final long millis2,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return millis2TimeSpan(Math.abs(millis1 - millis2), unit);
     }
 
@@ -431,15 +423,15 @@ public class DateUtils {
      * @param time The formatted time string.
      * @param unit The unit of time span.
      *             <ul>
-     *             <li>{@link TimeConstants#MSEC}</li>
-     *             <li>{@link TimeConstants#SEC }</li>
-     *             <li>{@link TimeConstants#MIN }</li>
-     *             <li>{@link TimeConstants#HOUR}</li>
-     *             <li>{@link TimeConstants#DAY }</li>
+     *             <li>{@link DateConstants#MSEC}</li>
+     *             <li>{@link DateConstants#SEC }</li>
+     *             <li>{@link DateConstants#MIN }</li>
+     *             <li>{@link DateConstants#HOUR}</li>
+     *             <li>{@link DateConstants#DAY }</li>
      *             </ul>
      * @return the time span by now, in unit
      */
-    public static long getTimeSpanByNow(final String time, @TimeConstants.Unit final int unit) {
+    public static long getTimeSpanByNow(final String time, @DateConstants.Unit final int unit) {
         return getTimeSpan(getNowString(), time, DEFAULT_FORMAT, unit);
     }
 
@@ -450,17 +442,17 @@ public class DateUtils {
      * @param format The format.
      * @param unit   The unit of time span.
      *               <ul>
-     *               <li>{@link TimeConstants#MSEC}</li>
-     *               <li>{@link TimeConstants#SEC }</li>
-     *               <li>{@link TimeConstants#MIN }</li>
-     *               <li>{@link TimeConstants#HOUR}</li>
-     *               <li>{@link TimeConstants#DAY }</li>
+     *               <li>{@link DateConstants#MSEC}</li>
+     *               <li>{@link DateConstants#SEC }</li>
+     *               <li>{@link DateConstants#MIN }</li>
+     *               <li>{@link DateConstants#HOUR}</li>
+     *               <li>{@link DateConstants#DAY }</li>
      *               </ul>
      * @return the time span by now, in unit
      */
     public static long getTimeSpanByNow(final String time,
                                         final DateFormat format,
-                                        @TimeConstants.Unit final int unit) {
+                                        @DateConstants.Unit final int unit) {
         return getTimeSpan(getNowString(format), time, format, unit);
     }
 
@@ -470,15 +462,15 @@ public class DateUtils {
      * @param date The date.
      * @param unit The unit of time span.
      *             <ul>
-     *             <li>{@link TimeConstants#MSEC}</li>
-     *             <li>{@link TimeConstants#SEC }</li>
-     *             <li>{@link TimeConstants#MIN }</li>
-     *             <li>{@link TimeConstants#HOUR}</li>
-     *             <li>{@link TimeConstants#DAY }</li>
+     *             <li>{@link DateConstants#MSEC}</li>
+     *             <li>{@link DateConstants#SEC }</li>
+     *             <li>{@link DateConstants#MIN }</li>
+     *             <li>{@link DateConstants#HOUR}</li>
+     *             <li>{@link DateConstants#DAY }</li>
      *             </ul>
      * @return the time span by now, in unit
      */
-    public static long getTimeSpanByNow(final Date date, @TimeConstants.Unit final int unit) {
+    public static long getTimeSpanByNow(final Date date, @DateConstants.Unit final int unit) {
         return getTimeSpan(new Date(), date, unit);
     }
 
@@ -488,15 +480,15 @@ public class DateUtils {
      * @param millis The milliseconds.
      * @param unit   The unit of time span.
      *               <ul>
-     *               <li>{@link TimeConstants#MSEC}</li>
-     *               <li>{@link TimeConstants#SEC }</li>
-     *               <li>{@link TimeConstants#MIN }</li>
-     *               <li>{@link TimeConstants#HOUR}</li>
-     *               <li>{@link TimeConstants#DAY }</li>
+     *               <li>{@link DateConstants#MSEC}</li>
+     *               <li>{@link DateConstants#SEC }</li>
+     *               <li>{@link DateConstants#MIN }</li>
+     *               <li>{@link DateConstants#HOUR}</li>
+     *               <li>{@link DateConstants#DAY }</li>
      *               </ul>
      * @return the time span by now, in unit
      */
-    public static long getTimeSpanByNow(final long millis, @TimeConstants.Unit final int unit) {
+    public static long getTimeSpanByNow(final long millis, @DateConstants.Unit final int unit) {
         return getTimeSpan(System.currentTimeMillis(), millis, unit);
     }
 
@@ -662,16 +654,16 @@ public class DateUtils {
             return String.format("%tc", millis);
         if (span < 1000) {
             return "刚刚";
-        } else if (span < TimeConstants.MIN) {
-            return String.format(Locale.getDefault(), "%d秒前", span / TimeConstants.SEC);
-        } else if (span < TimeConstants.HOUR) {
-            return String.format(Locale.getDefault(), "%d分钟前", span / TimeConstants.MIN);
+        } else if (span < DateConstants.MIN) {
+            return String.format(Locale.getDefault(), "%d秒前", span / DateConstants.SEC);
+        } else if (span < DateConstants.HOUR) {
+            return String.format(Locale.getDefault(), "%d分钟前", span / DateConstants.MIN);
         }
         // 获取当天 00:00
         long wee = getWeeOfToday();
         if (millis >= wee) {
             return String.format("今天%tR", millis);
-        } else if (millis >= wee - TimeConstants.DAY) {
+        } else if (millis >= wee - DateConstants.DAY) {
             return String.format("昨天%tR", millis);
         } else {
             return String.format("%tF", millis);
@@ -694,17 +686,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the milliseconds differ time span
      */
     public static long getMillis(final long millis,
                                  final long timeSpan,
-                                 @TimeConstants.Unit final int unit) {
+                                 @DateConstants.Unit final int unit) {
         return millis + timeSpan2Millis(timeSpan, unit);
     }
 
@@ -716,17 +708,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the milliseconds differ time span
      */
     public static long getMillis(final String time,
                                  final long timeSpan,
-                                 @TimeConstants.Unit final int unit) {
+                                 @DateConstants.Unit final int unit) {
         return getMillis(time, DEFAULT_FORMAT, timeSpan, unit);
     }
 
@@ -738,18 +730,18 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the milliseconds differ time span.
      */
     public static long getMillis(final String time,
                                  final DateFormat format,
                                  final long timeSpan,
-                                 @TimeConstants.Unit final int unit) {
+                                 @DateConstants.Unit final int unit) {
         return string2Millis(time, format) + timeSpan2Millis(timeSpan, unit);
     }
 
@@ -760,17 +752,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the milliseconds differ time span.
      */
     public static long getMillis(final Date date,
                                  final long timeSpan,
-                                 @TimeConstants.Unit final int unit) {
+                                 @DateConstants.Unit final int unit) {
         return date2Millis(date) + timeSpan2Millis(timeSpan, unit);
     }
 
@@ -782,17 +774,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the formatted time string differ time span
      */
     public static String getString(final long millis,
                                    final long timeSpan,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return getString(millis, DEFAULT_FORMAT, timeSpan, unit);
     }
 
@@ -804,18 +796,18 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the formatted time string differ time span
      */
     public static String getString(final long millis,
                                    final DateFormat format,
                                    final long timeSpan,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return millis2String(millis + timeSpan2Millis(timeSpan, unit), format);
     }
 
@@ -827,17 +819,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the formatted time string differ time span
      */
     public static String getString(final String time,
                                    final long timeSpan,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return getString(time, DEFAULT_FORMAT, timeSpan, unit);
     }
 
@@ -849,18 +841,18 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the formatted time string differ time span
      */
     public static String getString(final String time,
                                    final DateFormat format,
                                    final long timeSpan,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return millis2String(string2Millis(time, format) + timeSpan2Millis(timeSpan, unit), format);
     }
 
@@ -872,17 +864,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the formatted time string differ time span
      */
     public static String getString(final Date date,
                                    final long timeSpan,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return getString(date, DEFAULT_FORMAT, timeSpan, unit);
     }
 
@@ -894,18 +886,18 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the formatted time string differ time span
      */
     public static String getString(final Date date,
                                    final DateFormat format,
                                    final long timeSpan,
-                                   @TimeConstants.Unit final int unit) {
+                                   @DateConstants.Unit final int unit) {
         return millis2String(date2Millis(date) + timeSpan2Millis(timeSpan, unit), format);
     }
 
@@ -916,17 +908,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the date differ time span
      */
     public static Date getDate(final long millis,
                                final long timeSpan,
-                               @TimeConstants.Unit final int unit) {
+                               @DateConstants.Unit final int unit) {
         return millis2Date(millis + timeSpan2Millis(timeSpan, unit));
     }
 
@@ -938,17 +930,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the date differ time span
      */
     public static Date getDate(final String time,
                                final long timeSpan,
-                               @TimeConstants.Unit final int unit) {
+                               @DateConstants.Unit final int unit) {
         return getDate(time, DEFAULT_FORMAT, timeSpan, unit);
     }
 
@@ -960,18 +952,18 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the date differ time span
      */
     public static Date getDate(final String time,
                                final DateFormat format,
                                final long timeSpan,
-                               @TimeConstants.Unit final int unit) {
+                               @DateConstants.Unit final int unit) {
         return millis2Date(string2Millis(time, format) + timeSpan2Millis(timeSpan, unit));
     }
 
@@ -982,17 +974,17 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the date differ time span
      */
     public static Date getDate(final Date date,
                                final long timeSpan,
-                               @TimeConstants.Unit final int unit) {
+                               @DateConstants.Unit final int unit) {
         return millis2Date(date2Millis(date) + timeSpan2Millis(timeSpan, unit));
     }
 
@@ -1002,15 +994,15 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the milliseconds differ time span by now
      */
-    public static long getMillisByNow(final long timeSpan, @TimeConstants.Unit final int unit) {
+    public static long getMillisByNow(final long timeSpan, @DateConstants.Unit final int unit) {
         return getMillis(getNowMills(), timeSpan, unit);
     }
 
@@ -1021,15 +1013,15 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the formatted time string differ time span by now
      */
-    public static String getStringByNow(final long timeSpan, @TimeConstants.Unit final int unit) {
+    public static String getStringByNow(final long timeSpan, @DateConstants.Unit final int unit) {
         return getStringByNow(timeSpan, DEFAULT_FORMAT, unit);
     }
 
@@ -1040,17 +1032,17 @@ public class DateUtils {
      * @param format   The format.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the formatted time string differ time span by now
      */
     public static String getStringByNow(final long timeSpan,
                                         final DateFormat format,
-                                        @TimeConstants.Unit final int unit) {
+                                        @DateConstants.Unit final int unit) {
         return getString(getNowMills(), format, timeSpan, unit);
     }
 
@@ -1060,15 +1052,15 @@ public class DateUtils {
      * @param timeSpan The time span.
      * @param unit     The unit of time span.
      *                 <ul>
-     *                 <li>{@link TimeConstants#MSEC}</li>
-     *                 <li>{@link TimeConstants#SEC }</li>
-     *                 <li>{@link TimeConstants#MIN }</li>
-     *                 <li>{@link TimeConstants#HOUR}</li>
-     *                 <li>{@link TimeConstants#DAY }</li>
+     *                 <li>{@link DateConstants#MSEC}</li>
+     *                 <li>{@link DateConstants#SEC }</li>
+     *                 <li>{@link DateConstants#MIN }</li>
+     *                 <li>{@link DateConstants#HOUR}</li>
+     *                 <li>{@link DateConstants#DAY }</li>
      *                 </ul>
      * @return the date differ time span by now
      */
-    public static Date getDateByNow(final long timeSpan, @TimeConstants.Unit final int unit) {
+    public static Date getDateByNow(final long timeSpan, @DateConstants.Unit final int unit) {
         return getDate(getNowMills(), timeSpan, unit);
     }
 
@@ -1112,7 +1104,7 @@ public class DateUtils {
      */
     public static boolean isToday(final long millis) {
         long wee = getWeeOfToday();
-        return millis >= wee && millis < wee + TimeConstants.DAY;
+        return millis >= wee && millis < wee + DateConstants.DAY;
     }
 
     /**
@@ -1536,11 +1528,11 @@ public class DateUtils {
                 : (month + 10) % 12];
     }
 
-    private static long timeSpan2Millis(final long timeSpan, @TimeConstants.Unit final int unit) {
+    private static long timeSpan2Millis(final long timeSpan, @DateConstants.Unit final int unit) {
         return timeSpan * unit;
     }
 
-    private static long millis2TimeSpan(final long millis, @TimeConstants.Unit final int unit) {
+    private static long millis2TimeSpan(final long millis, @DateConstants.Unit final int unit) {
         return millis / unit;
     }
 
