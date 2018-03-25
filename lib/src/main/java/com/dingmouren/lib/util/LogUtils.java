@@ -123,7 +123,7 @@ public final class LogUtils {
     private static int     sStackDeep         = 1;     // The stack's deep of log.
 
     private LogUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
+        throw new UnsupportedOperationException(" can't instantiate LogUtils");
     }
 
     public static Config getConfig() {
