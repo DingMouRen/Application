@@ -84,7 +84,7 @@ public class ApplicationUtils {
      * 将新创建的activity或者到可见状态的activity置于集合的队尾
      * @param activity
      */
-    private static void setTopActivity(final Activity activity){
+    public static void setTopActivity(final Activity activity){
         if (sActivityList.contains(activity)){
             /*集合中含有这个activity,如果最后一个不是这个activity,就将原来的activity删除，将这个activity添加到队尾
             * 保持一个实例对象
