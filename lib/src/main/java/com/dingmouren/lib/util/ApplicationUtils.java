@@ -3,6 +3,7 @@ package com.dingmouren.lib.util;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.app.Application.ActivityLifecycleCallbacks;
 import java.util.LinkedList;
@@ -20,6 +21,8 @@ import java.util.LinkedList;
 public class ApplicationUtils {
 
     private static Application sApplication;
+
+    private static boolean sIsDebug = false;//当前应用是debug版本还是relesse版本
 
     private static LinkedList<Activity> sActivityList = new LinkedList<>();//存储activity的集合
 
@@ -69,6 +72,7 @@ public class ApplicationUtils {
     public static void init(final Context context){
         ApplicationUtils.sApplication = (Application) context.getApplicationContext();
         ApplicationUtils.sApplication.registerActivityLifecycleCallbacks(sActivityLifecycleCallbacks);//监听所有activity的生命周期变化
+        synIsDebug(context);//判断当前是debug版本还是release版本
     }
 
     /**
@@ -118,8 +122,24 @@ public class ApplicationUtils {
         }
     }
 
+    /**
+     * 获取所有activity的集合
+     * @return
+     */
     public static LinkedList<Activity> getActivityList() {
         return sActivityList;
+    }
+
+    /**
+     * 判断当前是debug还是release模式
+     * @return
+     */
+    public static boolean isDebug(){
+        return sIsDebug;
+    }
+
+    private static void synIsDebug(Context context){
+        sIsDebug = context.getApplicationInfo() != null && (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
     }
 
 }
