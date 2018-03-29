@@ -12,7 +12,7 @@ package com.dingmouren.lib.thread.builder;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.dingmouren.lib.manager.thread.ThreadPoolType;
+import com.dingmouren.lib.thread.ThreadPoolType;
 
 /** 
  *  创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。

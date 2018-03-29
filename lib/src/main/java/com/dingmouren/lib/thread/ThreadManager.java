@@ -1,11 +1,11 @@
-package com.dingmouren.lib.manager.thread;
+package com.dingmouren.lib.thread;
 
-import com.dingmouren.lib.manager.thread.builder.CachedBuilder;
-import com.dingmouren.lib.manager.thread.builder.CustomBuilder;
-import com.dingmouren.lib.manager.thread.builder.FixedBuilder;
-import com.dingmouren.lib.manager.thread.builder.ScheduledBuilder;
-import com.dingmouren.lib.manager.thread.builder.SingleBuilder;
-import com.dingmouren.lib.manager.thread.builder.ThreadPoolBuilder;
+import com.dingmouren.lib.thread.builder.CachedBuilder;
+import com.dingmouren.lib.thread.builder.CustomBuilder;
+import com.dingmouren.lib.thread.builder.FixedBuilder;
+import com.dingmouren.lib.thread.builder.ScheduledBuilder;
+import com.dingmouren.lib.thread.builder.SingleBuilder;
+import com.dingmouren.lib.thread.builder.ThreadPoolBuilder;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;

@@ -7,13 +7,13 @@
  * Date: 2017年4月20日 下午3:40:45
  * Version: 1.0
  */
-package com.dingmouren.lib.manager.thread.builder;
+package com.dingmouren.lib.thread.builder;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 
-import com.dingmouren.lib.manager.thread.ThreadPoolType;
+import com.dingmouren.lib.thread.ThreadPoolType;
 
 /** 
  */

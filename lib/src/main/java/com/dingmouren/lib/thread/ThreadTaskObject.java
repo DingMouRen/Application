@@ -7,7 +7,9 @@
  * Date: 2017年4月20日 下午7:05:58
  * Version: 1.0
  */
-package com.dingmouren.lib.manager.thread;
+package com.dingmouren.lib.thread;
+
+import com.dingmouren.lib.thread.ThreadManager;
 
 import java.util.concurrent.ExecutorService;
 

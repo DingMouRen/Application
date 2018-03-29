@@ -9,7 +9,7 @@
  */
 package com.dingmouren.lib.thread.builder;
 
-import com.dingmouren.lib.manager.thread.ThreadPoolType;
+import com.dingmouren.lib.thread.ThreadPoolType;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
