@@ -7,7 +7,7 @@
  * Date: 2017年4月20日 下午3:37:45
  * Version: 1.0
  */
-package com.dingmouren.lib.manager.thread.builder;
+package com.dingmouren.lib.thread.builder;
 
 import com.dingmouren.lib.manager.thread.ThreadPoolType;
 
