@@ -3,6 +3,7 @@ package com.dingmouren.commonlib.http;
 
 import android.util.Log;
 
+import com.dingmouren.commonlib.http.interceptor.HttpLogInterceptor;
 import com.dingmouren.commonlib.util.ApplicationUtils;
 import com.dingmouren.commonlib.util.LogUtils;
 
@@ -27,13 +28,10 @@ public class HttpManager {
 
     private static final int WRITE_TIME_OUT = 3;//写的超时时间
 
-    /*日志拦截器*/
-    private static HttpLoggingInterceptor sHttpLogInterceptor = new HttpLoggingInterceptor(message ->
-            showHttpLog(message)).setLevel(HttpLoggingInterceptor.Level.BODY);
 
     /*OkHttp的构建者对象*/
     private static OkHttpClient.Builder sOkHttpBuilder = new OkHttpClient.Builder()
-            .addInterceptor(sHttpLogInterceptor);
+            .addInterceptor(HttpLogInterceptor.getInstance());
 
     /*Retrofit的构建者对象*/
     private static Retrofit.Builder sRetrofitBuilder = new Retrofit.Builder()
