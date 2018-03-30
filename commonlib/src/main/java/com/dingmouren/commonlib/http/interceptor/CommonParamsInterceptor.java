@@ -12,7 +12,9 @@ import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.Buffer;
 
 /**
  * Created by Administrator on 2018/3/30.
@@ -82,7 +84,7 @@ public class CommonParamsInterceptor implements Interceptor {
     }
 
     /**
-     * POST请求方式下添加公共请求参数
+     * POST请求方式下添加公共请求参数(有问题)
      * @param request
      * @param commonParamsMap 公共请求参数
      */
@@ -106,4 +108,5 @@ public class CommonParamsInterceptor implements Interceptor {
 
         return request.newBuilder().post(newBody).build();
     }
+
 }
