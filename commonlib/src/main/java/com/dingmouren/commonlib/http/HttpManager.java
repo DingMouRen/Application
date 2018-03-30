@@ -3,6 +3,7 @@ package com.dingmouren.commonlib.http;
 
 import android.util.Log;
 
+import com.dingmouren.commonlib.http.interceptor.CommonParamsInterceptor;
 import com.dingmouren.commonlib.http.interceptor.HttpLogInterceptor;
 import com.dingmouren.commonlib.util.ApplicationUtils;
 import com.dingmouren.commonlib.util.LogUtils;
@@ -31,7 +32,8 @@ public class HttpManager {
 
     /*OkHttp的构建者对象*/
     private static OkHttpClient.Builder sOkHttpBuilder = new OkHttpClient.Builder()
-            .addInterceptor(HttpLogInterceptor.getInstance());
+            .addInterceptor(HttpLogInterceptor.getInstance())
+            .addInterceptor(new CommonParamsInterceptor());
 
     /*Retrofit的构建者对象*/
     private static Retrofit.Builder sRetrofitBuilder = new Retrofit.Builder()
@@ -69,14 +71,4 @@ public class HttpManager {
 
 
 
-    /**
-     * 显示网络日志
-     * @param message
-     */
-    private static void showHttpLog(String message) {
-
-        if (ApplicationUtils.isDebug()){
-           LogUtils.json(message);
-        }
-    }
 }

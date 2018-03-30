@@ -23,12 +23,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/09/23
- *     desc  : utils about activity
- * </pre>
+ * Activity工具类
+ isActivityExists               : 判断 Activity 是否存在
+ startActivity                  : 启动 Activity
+ startActivities                : 启动多个 Activity
+ startHomeActivity              : 回到桌面
+ getActivityList                : 获取 Activity 栈链表
+ getLauncherActivity            : 获取启动项 Activity
+ getTopActivity                 : 获取栈顶 Activity
+ isActivityExistsInStack        : 判断 Activity 是否存在栈中
+ finishActivity                 : 结束 Activity
+ finishToActivity               : 结束到指定 Activity
+ finishOtherActivities          : 结束所有其他类型的 Activity
+ finishAllActivities            : 结束所有 Activity
+ finishAllActivitiesExceptNewest: 结束除最新之外的所有 Activity
  */
 public final class ActivityUtils {
 

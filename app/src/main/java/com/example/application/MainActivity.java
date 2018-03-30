@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        HttpManager.getInstance().createService(TestApi.class).getData()
+       /* HttpManager.getInstance().createService(TestApi.class).getData()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -34,6 +34,31 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(Bean bean) {
                         LogUtils.e(bean);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });*/
+        HttpManager.getInstance().createService(TestApi.class).postMethodAddComonParamsTest()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Bean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Bean bean) {
+
                     }
 
                     @Override
