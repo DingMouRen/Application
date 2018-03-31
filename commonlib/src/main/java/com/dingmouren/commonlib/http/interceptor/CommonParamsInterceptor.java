@@ -47,7 +47,12 @@ public class CommonParamsInterceptor implements Interceptor {
                 break;
         }
 
-        LogUtils.e( newRequest.url().toString());
+        FormBody formBody = (FormBody) newRequest.body();
+        LogUtils.eTag("form长度",formBody.size()+"");
+        for (int i = 0; i < formBody.size(); i++) {
+            LogUtils.eTag("form","key:"+formBody.encodedName(i)+"  value:"+formBody.encodedValue(i));
+
+        }
         return chain.proceed(newRequest);
     }
 
@@ -84,29 +89,22 @@ public class CommonParamsInterceptor implements Interceptor {
     }
 
     /**
-     * POST请求方式下添加公共请求参数(有问题)
+     * POST请求方式下添加公共请求参数(表单方式)
      * @param request
      * @param commonParamsMap 公共请求参数
      */
     private Request postMethodDispose(Request request,Map<String,String> commonParamsMap) {
 
-        FormBody.Builder newBodyBuilder = new FormBody.Builder();
+      FormBody.Builder newFormBodyBuilder = new FormBody.Builder();
 
         Iterator iterator = commonParamsMap.entrySet().iterator();
         while (iterator.hasNext()){
             Map.Entry<String,String> entry = (Map.Entry<String,String>) iterator.next();
-            newBodyBuilder.add(entry.getKey(),entry.getValue());
+            newFormBodyBuilder.add(entry.getKey(),entry.getValue());
         }
 
-        FormBody oldBody = (FormBody) request.body();
-
-        for (int i = 0; i < oldBody.size(); i++) {
-            newBodyBuilder.add(oldBody.encodedName(i),oldBody.encodedValue(i));
-        }
-
-        FormBody newBody = newBodyBuilder.build();
-
-        return request.newBuilder().post(newBody).build();
+      return request.newBuilder().post(newFormBodyBuilder.build()).build();
     }
 
 }
+

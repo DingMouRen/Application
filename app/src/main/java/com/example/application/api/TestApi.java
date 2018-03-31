@@ -14,6 +14,6 @@ public interface TestApi {
     @GET("data/福利/10/1")
     Observable<Bean> getData();
 
-    @POST("test")
+    @POST("data/福利/10/1")
     Observable<Bean> postMethodAddComonParamsTest();
 }
