@@ -5,6 +5,7 @@ import com.dingmouren.commonlib.util.LogUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -24,86 +25,83 @@ import okio.Buffer;
 
 public class CommonParamsInterceptor implements Interceptor {
 
-    private static final String PHONT = "phone";
-    private static final String TOKEN = "token";
+    private   Map<String,String> mCommonParamsMap;
+
+    private CommonParamsInterceptor(){}
+
+    private CommonParamsInterceptor(Map<String,String> commonParamsMap){
+        this.mCommonParamsMap = commonParamsMap;
+    }
+
+    public static CommonParamsInterceptor getInstance(Map<String,String> commonParamsMap){
+        return new CommonParamsInterceptor(commonParamsMap);
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+
+        if (mCommonParamsMap.size() <= 0 || null == mCommonParamsMap){//如果没有公共请求参数，不做处理
+            return chain.proceed(chain.request());
+        }
 
         Request request = chain.request();//获取到Request对象
 
         String method = request.method();//获取到请求方式
 
-        Map<String,String> commonParamsMap = initCommonParams();//公共参数
-
-        Request newRequest = null;
         switch (method){//根据请求方式的不同选择相应的处理
             case "GET":
-                newRequest = getMethodDispose(request,commonParamsMap);
+                request = request.newBuilder().url(httpUrlGetAddedCommonParams(request)).build();
                 break;
 
             case "POST":
-                newRequest = postMethodDispose(request,commonParamsMap);
+                request = request.newBuilder().post(httpUrlPostAddedCommonParams(request)).build();
                 break;
         }
 
-        FormBody formBody = (FormBody) newRequest.body();
-        LogUtils.eTag("form长度",formBody.size()+"");
-        for (int i = 0; i < formBody.size(); i++) {
-            LogUtils.eTag("form","key:"+formBody.encodedName(i)+"  value:"+formBody.encodedValue(i));
-
-        }
-        return chain.proceed(newRequest);
+        return chain.proceed(request);
     }
 
     /**
-     * 初始化公共请求参数
+     * get请求下，添加公共请求参数到url末尾
+     * @param request
      * @return
      */
-    private Map<String,String> initCommonParams() {
-        Map<String,String> map = new HashMap<>();
-        map.put(PHONT, "android");
-        map.put(TOKEN, "token");
-        return map;
-    }
-
-    /**
-     * GET请求方式下添加公共请求参数(在末尾添加公共请求参数)
-     * http://gank.io/api/data/%E7%A6%8F%E5%88%A9/10/1?phone=android&token=token
-     * @param request
-     * @param commonParamsMap 公共请求参数
-     */
-    private Request getMethodDispose(Request request,Map<String,String> commonParamsMap) {
+    private HttpUrl httpUrlGetAddedCommonParams(Request request) {
 
         HttpUrl.Builder builder = request.url().newBuilder();
 
-        Iterator iterator = commonParamsMap.entrySet().iterator();
+        Iterator iterator = mCommonParamsMap.entrySet().iterator();
         while (iterator.hasNext()){
             Map.Entry<String,String> entry = (Map.Entry<String,String>) iterator.next();
             builder.addQueryParameter(entry.getKey(),entry.getValue());
         }
 
-        HttpUrl httpUrl = builder.build();
-        return request.newBuilder().url(httpUrl).build();
-
+        return builder.build();
     }
 
     /**
-     * POST请求方式下添加公共请求参数(表单方式)
+     * post请求下，添加公共请求参数到表单
      * @param request
-     * @param commonParamsMap 公共请求参数
+     * @return
      */
-    private Request postMethodDispose(Request request,Map<String,String> commonParamsMap) {
+    private RequestBody httpUrlPostAddedCommonParams(Request request) {
 
-      FormBody.Builder newFormBodyBuilder = new FormBody.Builder();
+        FormBody.Builder newFormBuilder = new FormBody.Builder();
 
-        Iterator iterator = commonParamsMap.entrySet().iterator();
+        /*post表单中追加的公共请求参数*/
+        Iterator<Map.Entry<String,String>> iterator = mCommonParamsMap.entrySet().iterator();
         while (iterator.hasNext()){
-            Map.Entry<String,String> entry = (Map.Entry<String,String>) iterator.next();
-            newFormBodyBuilder.add(entry.getKey(),entry.getValue());
+            Map.Entry<String,String> entry = iterator.next();
+            newFormBuilder.add(entry.getKey(),entry.getValue());
         }
 
-      return request.newBuilder().post(newFormBodyBuilder.build()).build();
+        /*拦截原来请求中用户传入的参数数据，将参数遍历放入新的表单中，然后一并提交*/
+        FormBody oldForm = (FormBody) request.body();
+        for (int i = 0; i < oldForm.size(); i++) {
+            newFormBuilder.add(oldForm.encodedName(i),oldForm.encodedValue(i));
+        }
+
+        return newFormBuilder.build();
     }
 
 }

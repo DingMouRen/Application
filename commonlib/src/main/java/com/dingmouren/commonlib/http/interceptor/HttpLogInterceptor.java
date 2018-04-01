@@ -28,7 +28,7 @@ public class HttpLogInterceptor {
     private static void showHttpLog(String message) {
 
         if (ApplicationUtils.isDebug()){//在debug环境下，打印服务端返回的数据以及http请求相关数据
-            LogUtils.json(message);
+            if (null  != message && message.length() > 0) LogUtils.json(message);
         }
     }
 }

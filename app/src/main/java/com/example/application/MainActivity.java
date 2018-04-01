@@ -2,6 +2,7 @@ package com.example.application;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.dingmouren.commonlib.http.HttpManager;
 import com.dingmouren.commonlib.util.LogUtils;
@@ -21,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* HttpManager.getInstance().createService(TestApi.class).getData()
+
+    }
+
+    public void requestHttp(View view){
+        HttpManager.getInstance().createService(TestApi.class).getData()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -45,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete() {
 
                     }
-                });*/
-        HttpManager.getInstance().createService(TestApi.class).postMethodAddComonParamsTest()
+                });
+       /* HttpManager.getInstance().createService(TestApi.class).postMethodAddComonParamsTest()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -70,6 +75,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete() {
 
                     }
-                });
+                });*/
     }
 }

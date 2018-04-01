@@ -8,6 +8,14 @@ import com.dingmouren.commonlib.http.interceptor.HttpLogInterceptor;
 import com.dingmouren.commonlib.util.ApplicationUtils;
 import com.dingmouren.commonlib.util.LogUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -29,11 +37,23 @@ public class HttpManager {
 
     private static final int WRITE_TIME_OUT = 3;//写的超时时间
 
+    private static Map<String,String> sCommomParamsMap = new HashMap<>();//需要传入的公共请求参数
+
+    static {
+
+        /*初始化公共请求参数*/
+//        sCommomParamsMap.put("phone","Android");
+//        sCommomParamsMap.put("name","19");
+    }
+
+
+
+
 
     /*OkHttp的构建者对象*/
     private static OkHttpClient.Builder sOkHttpBuilder = new OkHttpClient.Builder()
             .addInterceptor(HttpLogInterceptor.getInstance())
-            .addInterceptor(new CommonParamsInterceptor());
+            .addInterceptor(CommonParamsInterceptor.getInstance(sCommomParamsMap));
 
     /*Retrofit的构建者对象*/
     private static Retrofit.Builder sRetrofitBuilder = new Retrofit.Builder()
