@@ -1,23 +1,14 @@
 package com.dingmouren.commonlib.http;
 
 
-import android.util.Log;
-
-import com.dingmouren.commonlib.http.interceptor.CommonParamsInterceptor;
+import com.dingmouren.commonlib.http.interceptor.HttpCommonHeaderInterceptor;
+import com.dingmouren.commonlib.http.interceptor.HttpCommonParamInterceptor;
 import com.dingmouren.commonlib.http.interceptor.HttpLogInterceptor;
-import com.dingmouren.commonlib.util.ApplicationUtils;
-import com.dingmouren.commonlib.util.LogUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -37,13 +28,18 @@ public class HttpManager {
 
     private static final int WRITE_TIME_OUT = 3;//写的超时时间
 
-    private static Map<String,String> sCommomParamsMap = new HashMap<>();//需要传入的公共请求参数
+    private static Map<String,String> sCommomParamsMap = new HashMap<>();//公共请求参数的map集合
+
+    private static Map<String,String> sCommonHeadersMap = new HashMap<>();//公共头信息的map集合
 
     static {
 
-        /*初始化公共请求参数*/
+        /*初始化公共请求参数集合*/
 //        sCommomParamsMap.put("phone","Android");
 //        sCommomParamsMap.put("name","19");
+
+        /*初始化公共头信息集合*/
+        sCommonHeadersMap.put("demo","test");
     }
 
 
@@ -53,7 +49,8 @@ public class HttpManager {
     /*OkHttp的构建者对象*/
     private static OkHttpClient.Builder sOkHttpBuilder = new OkHttpClient.Builder()
             .addInterceptor(HttpLogInterceptor.getInstance())
-            .addInterceptor(CommonParamsInterceptor.getInstance(sCommomParamsMap));
+            .addInterceptor(HttpCommonParamInterceptor.getInstance(sCommomParamsMap))
+            .addInterceptor(HttpCommonHeaderInterceptor.getInstance(sCommonHeadersMap));
 
     /*Retrofit的构建者对象*/
     private static Retrofit.Builder sRetrofitBuilder = new Retrofit.Builder()

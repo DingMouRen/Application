@@ -1,11 +1,6 @@
 package com.dingmouren.commonlib.http.interceptor;
 
-import com.dingmouren.commonlib.util.DeviceUtils;
-import com.dingmouren.commonlib.util.LogUtils;
-
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -15,26 +10,25 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.Buffer;
 
 /**
  * Created by Administrator on 2018/3/30.
- *  添加公共请求参数的拦截器
+ *  网络请求中添加公共请求参数的插入器
  *  使用addInterceptor（）这个方法
  */
 
-public class CommonParamsInterceptor implements Interceptor {
+public class HttpCommonParamInterceptor implements Interceptor {
 
     private   Map<String,String> mCommonParamsMap;
 
-    private CommonParamsInterceptor(){}
+    private HttpCommonParamInterceptor(){}
 
-    private CommonParamsInterceptor(Map<String,String> commonParamsMap){
+    private HttpCommonParamInterceptor(Map<String,String> commonParamsMap){
         this.mCommonParamsMap = commonParamsMap;
     }
 
-    public static CommonParamsInterceptor getInstance(Map<String,String> commonParamsMap){
-        return new CommonParamsInterceptor(commonParamsMap);
+    public static HttpCommonParamInterceptor getInstance(Map<String,String> commonParamsMap){
+        return new HttpCommonParamInterceptor(commonParamsMap);
     }
 
     @Override
