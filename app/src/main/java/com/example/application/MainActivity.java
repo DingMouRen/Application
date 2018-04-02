@@ -33,22 +33,22 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Observer<Bean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        LogUtils.e("onSubscribe");
                     }
 
                     @Override
                     public void onNext(Bean bean) {
-                        LogUtils.e(bean);
+                        LogUtils.e("onNext");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        LogUtils.e("onError");
                     }
 
                     @Override
                     public void onComplete() {
-
+                        LogUtils.e("onComplete");
                     }
                 });
        /* HttpManager.getInstance().createService(TestApi.class).postMethodAddComonParamsTest()
