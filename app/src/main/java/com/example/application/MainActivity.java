@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.dingmouren.commonlib.http.BaseObserver;
 import com.dingmouren.commonlib.http.HttpManager;
 import com.dingmouren.commonlib.util.LogUtils;
 import com.example.application.api.TestApi;
@@ -30,25 +31,10 @@ public class MainActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Bean>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        LogUtils.e("onSubscribe");
-                    }
-
+                .subscribe(new BaseObserver<Bean>() {
                     @Override
                     public void onNext(Bean bean) {
-                        LogUtils.e("onNext");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtils.e("onError");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        LogUtils.e("onComplete");
+                        LogUtils.e(bean);
                     }
                 });
        /* HttpManager.getInstance().createService(TestApi.class).postMethodAddComonParamsTest()

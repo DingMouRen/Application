@@ -55,8 +55,8 @@ public class HttpManager {
             .addInterceptor(HttpLogInterceptor.getInstance())
             .addInterceptor(HttpCommonParamInterceptor.getInstance(sCommomParamsMap))
             .addInterceptor(HttpCommonHeaderInterceptor.getInstance(sCommonHeadersMap))
-            .cache(HttpCache.getCacheObject())
-            .addNetworkInterceptor(HttpCacheInterceptor.getInstance());
+            /*.cache(HttpCache.getCacheObject())
+            .addNetworkInterceptor(HttpCacheInterceptor.getInstance())*/;
 
     /*Retrofit的构建者对象*/
     private static Retrofit.Builder sRetrofitBuilder = new Retrofit.Builder()
