@@ -1,13 +1,17 @@
 package com.dingmouren.commonlib.http;
 
 
+import com.dingmouren.commonlib.http.interceptor.HttpCache;
+import com.dingmouren.commonlib.http.interceptor.HttpCacheInterceptor;
 import com.dingmouren.commonlib.http.interceptor.HttpCommonHeaderInterceptor;
 import com.dingmouren.commonlib.http.interceptor.HttpCommonParamInterceptor;
 import com.dingmouren.commonlib.http.interceptor.HttpLogInterceptor;
+import com.dingmouren.commonlib.util.ApplicationUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -39,7 +43,7 @@ public class HttpManager {
 //        sCommomParamsMap.put("name","19");
 
         /*初始化公共头信息集合*/
-        sCommonHeadersMap.put("demo","test");
+//        sCommonHeadersMap.put("demo","test");
     }
 
 
@@ -50,7 +54,9 @@ public class HttpManager {
     private static OkHttpClient.Builder sOkHttpBuilder = new OkHttpClient.Builder()
             .addInterceptor(HttpLogInterceptor.getInstance())
             .addInterceptor(HttpCommonParamInterceptor.getInstance(sCommomParamsMap))
-            .addInterceptor(HttpCommonHeaderInterceptor.getInstance(sCommonHeadersMap));
+            .addInterceptor(HttpCommonHeaderInterceptor.getInstance(sCommonHeadersMap))
+            .cache(HttpCache.getCacheObject())
+            .addNetworkInterceptor(HttpCacheInterceptor.getInstance());
 
     /*Retrofit的构建者对象*/
     private static Retrofit.Builder sRetrofitBuilder = new Retrofit.Builder()
