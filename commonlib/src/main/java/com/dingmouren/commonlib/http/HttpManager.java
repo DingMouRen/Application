@@ -60,7 +60,7 @@ public class HttpManager {
 
     /*Retrofit的构建者对象*/
     private static Retrofit.Builder sRetrofitBuilder = new Retrofit.Builder()
-            .baseUrl("http://gank.io/api/")
+            .baseUrl("http://d5bnvg.natappfree.cc/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 

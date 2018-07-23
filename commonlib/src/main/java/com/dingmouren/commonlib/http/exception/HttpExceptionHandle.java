@@ -1,5 +1,6 @@
 package com.dingmouren.commonlib.http.exception;
 
+import com.dingmouren.commonlib.util.LogUtils;
 import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
@@ -19,7 +20,7 @@ import retrofit2.HttpException;
  */
 
 public class HttpExceptionHandle {
-
+    private static final String TAG = HttpExceptionHandle.class.getName();
     private static final int UNAUTHORIZED = 401;
     private static final int FORBIDDEN = 403;
     private static final int NOT_FOUND = 404;
@@ -31,7 +32,7 @@ public class HttpExceptionHandle {
 
     public static ResponseException handleException(Throwable throwable){
         ResponseException responseException;
-
+        LogUtils.eTag(TAG,throwable.toString());
         if (throwable instanceof HttpException){
             HttpException httpException = (HttpException) throwable;
             responseException = new ResponseException(throwable,Error.HTTP_ERROR);
@@ -72,7 +73,7 @@ public class HttpExceptionHandle {
             responseException = new ResponseException(throwable, Error.TIMEOUT_ERROR);
             responseException.message = "连接超时";
             return responseException;
-        }else if ( throwable instanceof UnknownHostException){
+        }else if ( throwable instanceof UnknownHostException) {
             responseException = new ResponseException(throwable, Error.UNKNOWN_ERROR);
             responseException.message = "No address associated with hostname,请先检查网络是否连接";
             return responseException;
