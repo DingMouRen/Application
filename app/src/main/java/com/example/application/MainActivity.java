@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.dingmouren.commonlib.base.BaseActivity;
 import com.dingmouren.commonlib.http.BaseObserver;
 import com.dingmouren.commonlib.http.HttpManager;
 import com.dingmouren.commonlib.rxlifecycle.DisposableManager;
@@ -45,7 +46,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private LinearLayout  mContainer;
     @Override

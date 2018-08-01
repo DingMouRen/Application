@@ -58,6 +58,7 @@ public final class NetworkUtils {
 
     /**
      * Open the settings of wireless.
+     * 打开无线设置
      */
     public static void openWirelessSettings() {
         ApplicationUtils.getApp().startActivity(
@@ -68,6 +69,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether network is connected.
+     * 返回网络是否已连接
      * <p>Must hold
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
@@ -81,6 +83,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether network is available using ping.
+     * 使用ping返回网络是否可用
      * <p>Must hold {@code <uses-permission android:name="android.permission.INTERNET" />}</p>
      * <p>The default ping ip: 223.5.5.5</p>
      *
@@ -93,6 +96,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether network is available using ping.
+     * 使用ping返回网络是否可用
      * <p>Must hold {@code <uses-permission android:name="android.permission.INTERNET" />}</p>
      *
      * @param ip The ip address.
@@ -116,7 +120,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether mobile data is enabled.
-     *
+     * 返回是否启用移动数据
      * @return {@code true}: enabled<br>{@code false}: disabled
      */
     public static boolean getMobileDataEnabled() {
@@ -137,6 +141,7 @@ public final class NetworkUtils {
 
     /**
      * Set mobile data enabled.
+     * 设置移动数据已启用
      * <p>Must hold {@code android:sharedUserId="android.uid.system"},
      * {@code <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />}</p>
      *
@@ -160,6 +165,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether using mobile data.
+     * 返回是否使用移动数据
      * <p>Must hold
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
@@ -175,6 +181,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether using 4G.
+     * 返回是否使用4G
      * <p>Must hold
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
@@ -190,6 +197,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether wifi is enabled.
+     * 返回是否启用了wifi
      * <p>Must hold
      * {@code <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />}</p>
      *
@@ -204,6 +212,7 @@ public final class NetworkUtils {
 
     /**
      * Set wifi enabled.
+     * 设置wifi启用
      * <p>Must hold
      * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
      *
@@ -227,6 +236,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether wifi is connected.
+     * 返回是否连接了wifi
      * <p>Must hold
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
@@ -243,6 +253,7 @@ public final class NetworkUtils {
 
     /**
      * Return whether wifi is available.
+     * 返回是否有wifi
      * <p>Must hold
      * {@code <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />},
      * {@code <uses-permission android:name="android.permission.INTERNET" />}</p>
@@ -256,7 +267,7 @@ public final class NetworkUtils {
 
     /**
      * Return the name of network operate.
-     *
+     * 返回网络运营名称
      * @return the name of network operate
      */
     public static String getNetworkOperatorName() {
@@ -271,6 +282,7 @@ public final class NetworkUtils {
 
     /**
      * Return type of network.
+     * 返回网络类型
      * <p>Must hold
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *

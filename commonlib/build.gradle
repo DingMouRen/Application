@@ -44,5 +44,7 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     /*图片加载*/
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    /*组件通信*/
+    compile 'org.greenrobot:eventbus:3.0.0'
 
 }

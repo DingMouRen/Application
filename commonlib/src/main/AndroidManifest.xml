@@ -5,4 +5,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!--判断网络状态NetworkUtils需要这个权限-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <application>
+
+        <!--网络状态变化的接收器-->
+        <receiver android:name=".receiver.NetworkConnectChangedReceiver">
+            <intent-filter>
+                <action android:name="android.net.con.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+    </application>
 </manifest>
