@@ -41,4 +41,12 @@ public class NetworkChangeEvent {
     public void setNetworkType(NetworkType mNetworkType) {
         this.mNetworkType = mNetworkType;
     }
+
+    @Override
+    public String toString() {
+        return "NetworkChangeEvent{" +
+                "mIsConnected=" + mIsConnected +
+                ", mNetworkType=" + mNetworkType +
+                '}';
+    }
 }

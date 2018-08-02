@@ -22,13 +22,7 @@ public class NetworkConnectChangedReceiver extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e(TAG, "监听到网路变化:"
-                +"\ngetAction"+intent.getAction()
-                +"\ngetDataString"+intent.getDataString()
-                +"\ngetPackage"+intent.getPackage()
-                +"\ngetScheme"+intent.getScheme()
-                +"\ngetType"+intent.getType()
-        );
+
         if (intent.getAction() == ConnectivityManager.CONNECTIVITY_ACTION) {
             /*判断当前网络时候可用以及网络类型*/
             boolean isConnected = NetworkUtils.isConnected();

@@ -45,9 +45,11 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     protected boolean mCheckNetwork = true;/*默认检查网络状态*/
 
-    private NetworkConnectChangedReceiver netWorkChangReceiver;/*网络状态变化的广播接收器*/
+    protected boolean mNetConnected;/*网络连接的状态，true表示有网络，flase表示无网络连接*/
 
-    private NetStateChangedDialog netStateChangedDialog;
+    private NetworkConnectChangedReceiver mNetWorkChangReceiver;/*网络状态变化的广播接收器*/
+
+    private NetStateChangedDialog mNetStateChangedDialog;/*网络状态变化的提示对话框*/
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,37 +59,26 @@ public abstract class BaseActivity extends AppCompatActivity{
 
         EventBus.getDefault().register(this);
 
-        netStateChangedDialog = new NetStateChangedDialog(this);
+        mNetStateChangedDialog = new NetStateChangedDialog(this);
 
         //注册网络状态监听广播
-        netWorkChangReceiver = new NetworkConnectChangedReceiver();
+        mNetWorkChangReceiver = new NetworkConnectChangedReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(netWorkChangReceiver, filter);
+        registerReceiver(mNetWorkChangReceiver, filter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        netStateChangedUI(NetworkUtils.isConnected());
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-
-    @Override
-    public void finish() {
-        super.finish();
-
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(netWorkChangReceiver);
+        unregisterReceiver(mNetWorkChangReceiver);
         EventBus.getDefault().unregister(this);
     }
 
@@ -97,8 +88,27 @@ public abstract class BaseActivity extends AppCompatActivity{
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNetworkChangeEvent(NetworkChangeEvent event){
-        Log.i(TAG,"接收到NetworkChangeEvent");
-        if (!event.isConnected())netStateChangedDialog.show();
+
+        Log.i(TAG,"网络发生变化:"+event.toString());
+
+        mNetConnected = event.isConnected();
+
+        netStateChangedUI(event.isConnected());
+
+    }
+
+    /**
+     * 根据网络状态显示或者隐藏提示对话框
+     * @param isConnected
+     */
+    private void netStateChangedUI(boolean isConnected){
+        if (mCheckNetwork) {
+            if (isConnected) {
+                if (null != mNetStateChangedDialog)mNetStateChangedDialog.dismiss();
+            }else {
+                if (null != mNetStateChangedDialog)mNetStateChangedDialog.show();
+            }
+        }
     }
 
     /**
@@ -109,12 +119,5 @@ public abstract class BaseActivity extends AppCompatActivity{
         mCheckNetwork = checkNetWork;
     }
 
-    /**
-     * 返回当前是否要检查网络状态变化
-     * @return
-     */
-    public boolean isCheckNetWork() {
-        return mCheckNetwork;
-    }
 
 }

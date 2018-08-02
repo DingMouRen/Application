@@ -8,11 +8,5 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application>
 
-        <!--网络状态变化的广播接收器-->
-        <receiver android:name=".receiver.NetworkConnectChangedReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
     </application>
 </manifest>
