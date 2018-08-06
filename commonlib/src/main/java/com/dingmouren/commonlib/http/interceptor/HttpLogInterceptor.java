@@ -3,7 +3,6 @@ package com.dingmouren.commonlib.http.interceptor;
 import com.dingmouren.commonlib.util.ApplicationUtils;
 import com.dingmouren.commonlib.util.LogUtils;
 
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by Administrator on 2018/3/30.
