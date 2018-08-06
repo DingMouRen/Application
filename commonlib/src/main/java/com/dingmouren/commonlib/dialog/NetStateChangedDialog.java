@@ -1,4 +1,4 @@
-package dialog;
+package com.dingmouren.commonlib.dialog;
 
 import android.app.Dialog;
 import android.content.Context;

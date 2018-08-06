@@ -1,27 +1,13 @@
 package com.dingmouren.commonlib.base;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.graphics.PixelFormat;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.TextView;
 
-import com.dingmouren.commonlib.R;
 import com.dingmouren.commonlib.event.NetworkChangeEvent;
 import com.dingmouren.commonlib.receiver.NetworkConnectChangedReceiver;
 import com.dingmouren.commonlib.util.NetworkUtils;
@@ -30,7 +16,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import dialog.NetStateChangedDialog;
+import com.dingmouren.commonlib.dialog.NetStateChangedDialog;
 
 /**
  * Created by dingmouren on 2018/3/19.
