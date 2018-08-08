@@ -24,35 +24,72 @@ import com.example.application.bean.ResponseBody;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
+import okio.BufferedSink;
 
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
-    private LinearLayout  mContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mContainer = findViewById(R.id.linear);
-        checkPermission();
-        requestHttp();
+    }
 
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+
+
+    /*okhttp的post提交String*/
+    private void postString() {
+        MediaType mediaType = MediaType.parse("text/x-markdown; charset=utf-8");
+        OkHttpClient client = new OkHttpClient();
+        String postBodyStr = "适当方式和fish的覅是否是";
+        Request request =  new Request.Builder()
+                .url("http://10.0.2.2:8080/user/article")
+                .post(RequestBody.create(mediaType,postBodyStr))
+                .build();
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onClick(View v) {
-                uploadIcon();
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()){
+                    final Headers headers = response.headers();
+                    for (int i = 0; i < headers.size(); i++) {
+                        final int finalI = i;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.e("post提交String--首部字段",headers.name(finalI)+":"+headers.value(finalI));
+                            }
+                        });
+
+                    }
+                }
             }
         });
+
     }
+
+
 
     @Override
     protected void onPause() {
@@ -60,6 +97,9 @@ public class MainActivity extends BaseActivity {
         DisposableManager.clear();
     }
 
+    /**
+     * 请求第一页数据
+     */
     public void requestHttp( ){
 
 
@@ -70,22 +110,14 @@ public class MainActivity extends BaseActivity {
                 .subscribe(new BaseObserver<ResponseBody<DataBean>>() {
                     @Override
                     public void onNext(ResponseBody<DataBean> dataBeanResponseBody) {
-                        if (dataBeanResponseBody.getCode() == 1){
-                            List<DataBean> list = (List<DataBean>) dataBeanResponseBody.getData();
-                            for (DataBean dataBean : list){
-                                ImageView imageView = new ImageView(MainActivity.this);
-                                LinearLayout.LayoutParams layoutParams =  new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-                                layoutParams.setMargins(0,16,0,0);
-                                imageView.setLayoutParams(layoutParams);
-                                Glide.with(MainActivity.this).load(dataBean.getImage()).into(imageView);
-                                mContainer.addView(imageView);
-                            }
-                        }
                     }
                 });
 
     }
 
+    /**
+     * 上传图片文件
+     */
     public void uploadIcon(){
         InputStream ins=getResources().openRawResource(R.raw.icon);
         File file = new File(Environment.getExternalStorageDirectory()+"/icon.png");
@@ -103,7 +135,6 @@ public class MainActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("img",file.getName(),requestBody);
         HttpManager.getInstance().createService(TestApi.class).uploadIcon(body)
@@ -117,6 +148,10 @@ public class MainActivity extends BaseActivity {
                     }
                 });
     }
+
+    /**
+     * 申请存储权限
+     */
     private void checkPermission() {
         //检查权限（NEED_PERMISSION）是否被授权 PackageManager.PERMISSION_GRANTED表示同意授权
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
