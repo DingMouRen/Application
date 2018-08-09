@@ -20,6 +20,5 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':cameralib')
-    implementation project(':commonlib')
+    compile project(':commonlib')
 }

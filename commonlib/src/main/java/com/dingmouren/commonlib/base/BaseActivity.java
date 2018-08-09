@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.dingmouren.commonlib.dialog.LoadingDialog;
 import com.dingmouren.commonlib.event.NetworkChangeEvent;
 import com.dingmouren.commonlib.receiver.NetworkConnectChangedReceiver;
 import com.dingmouren.commonlib.util.NetworkUtils;
@@ -37,6 +38,8 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     private NetStateChangedDialog mNetStateChangedDialog;/*网络状态变化的提示对话框*/
 
+    private LoadingDialog mLoadingDialog;/*加载进度对话框*/
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,9 @@ public abstract class BaseActivity extends AppCompatActivity{
 
         EventBus.getDefault().register(this);
 
-        mNetStateChangedDialog = new NetStateChangedDialog(this);
+        mNetStateChangedDialog = new NetStateChangedDialog(this);/*网络状态变化的提示对话框*/
+
+        mLoadingDialog = new LoadingDialog(this);/*加载进度对话框*/
 
         //注册网络状态监听广播
         mNetWorkChangReceiver = new NetworkConnectChangedReceiver();
@@ -66,6 +71,29 @@ public abstract class BaseActivity extends AppCompatActivity{
         super.onDestroy();
         unregisterReceiver(mNetWorkChangReceiver);
         EventBus.getDefault().unregister(this);
+    }
+
+
+    /**
+     * 设置是否要检查网络状态变化
+     * @param checkNetWork
+     */
+    protected void setCheckNetWork(boolean checkNetWork) {
+        mCheckNetwork = checkNetWork;
+    }
+
+    /**
+     * 展示加载对话框
+     */
+    protected void showLoadingDialog(){
+        mLoadingDialog.show();
+    }
+
+    /**
+     * 隐藏加载对话框
+     */
+    protected void dismissLoadingDialog(){
+        mLoadingDialog.dismiss();
     }
 
     /**
@@ -97,13 +125,6 @@ public abstract class BaseActivity extends AppCompatActivity{
         }
     }
 
-    /**
-     * 设置是否要检查网络状态变化
-     * @param checkNetWork
-     */
-    public void setCheckNetWork(boolean checkNetWork) {
-        mCheckNetwork = checkNetWork;
-    }
 
 
 }

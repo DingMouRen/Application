@@ -6,6 +6,7 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <!--对话框：网络状态相关-->
     <style name="StyleNetChangedDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -13,5 +14,11 @@
     <style name="StyleNetChangedDialog.Animation" parent="Animation.AppCompat.Dialog">
         <item name="android:windowEnterAnimation">@anim/translate_netstate_dialog_in</item>
         <item name="android:windowExitAnimation">@anim/translate_netstate_dialog_out</item>
+    </style>
+
+    <!--对话框：加载进度-->
+    <style name="StyleLoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 </resources>
