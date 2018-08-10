@@ -6,13 +6,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.dingmouren.commonlib.base.BaseActivity;
+import com.example.application.base.BaseActivity;
 import com.dingmouren.commonlib.http.BaseObserver;
 import com.dingmouren.commonlib.http.HttpManager;
 import com.dingmouren.commonlib.rxlifecycle.DisposableManager;
@@ -27,13 +23,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -41,18 +35,26 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
 
 
 public class MainActivity extends BaseActivity {
-    private static final String TAG = "MainActivity";
+
+    private static final String TAG = MainActivity.class.getName();
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initView() {
         showLoadingDialog();
     }
 
+    @Override
+    protected void initListener() {
+
+    }
 
 
     /*okhttp的post提交String*/

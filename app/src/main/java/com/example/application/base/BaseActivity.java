@@ -1,4 +1,4 @@
-package com.dingmouren.commonlib.base;
+package com.example.application.base;
 
 import android.content.Context;
 import android.content.IntentFilter;
@@ -18,6 +18,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import com.dingmouren.commonlib.dialog.NetStateChangedDialog;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by dingmouren on 2018/3/19.
@@ -44,7 +46,19 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        init();/*初始化视图前的初始化*/
+
+        setContentView(getLayoutView());
+
+        initView();/*初始化视图*/
+
+        initListener();/*初始化监听*/
+
+        initData();/*初始化数据*/
+
         mContext = this;
+
+        ButterKnife.bind(this);
 
         EventBus.getDefault().register(this);
 
@@ -58,6 +72,16 @@ public abstract class BaseActivity extends AppCompatActivity{
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(mNetWorkChangReceiver, filter);
     }
+
+    protected void init(){}/*初始化视图前的初始化*/
+
+    protected abstract int getLayoutView();/*设置布局*/
+
+    protected abstract void initView();/*初始化视图*/
+
+    protected abstract void initListener();/*初始化监听*/
+
+    protected void initData(){}/*初始化监听*/
 
     @Override
     protected void onResume() {
